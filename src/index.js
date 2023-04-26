@@ -6,14 +6,13 @@ const bodyParser = require('body-parser')
 const authRoutes = require('../src/routes/authRoutes');
 const trackRoutes = require('./routes/trackRoutes')
 const requireAuth = require('./middlewares/requireAuth');
+const mongoUri = require(process.env.MONGO_URI);
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
-
-const mongoUri = 'mongodb+srv://admin-dev81:Y7QdFSGGhkfICJcl@tracker-server.25acpy7.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.connect(mongoUri);
 mongoose.connection.on('connected', () => {
